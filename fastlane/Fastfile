@@ -1,0 +1,47 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  lane :hello do
+    puts "Fastlane installed successfully 🚀"
+  end
+
+  # ------------------------
+  # Run Unit Tests
+  # ------------------------
+  desc "Run unit tests on iOS Simulator"
+  lane :tests do
+    scan(
+      scheme: "AVplayerDemo",          # <-- replace with your scheme
+      device: "iPhone 16e",
+      clean: true
+    )
+  end
+
+  # ------------------------
+  # Build App (No Signing)
+  # ------------------------
+  desc "Build app for simulator without code signing"
+  lane :build do
+    gym(
+      scheme: "AVplayerDemo",          # <-- replace with your scheme
+      destination: "generic/platform=iOS Simulator",
+      skip_codesigning: true,
+      clean: true
+    )
+  end
+end
