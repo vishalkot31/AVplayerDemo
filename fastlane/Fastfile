@@ -37,11 +37,10 @@ platform :ios do
   # ------------------------
   desc "Build app for simulator without code signing"
   lane :build do
-    gym(
-      scheme: "AVplayerDemo",          # <-- replace with your scheme
-      destination: "generic/platform=iOS Simulator",
-      skip_codesigning: true,
-      clean: true
-    )
+     sh <<-CMD
+      xcodebuild build \
+      -scheme AVplayerDemo \
+      -destination 'platform=iOS Simulator,name=iPhone 16e'
+    CMD
   end
 end
